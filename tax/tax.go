@@ -5,6 +5,9 @@ type TaxSet struct {
 	tax   int
 }
 
+//450万以上の税金額
+const maxTax = 21800
+
 func NewList() []TaxSet {
 	list := []TaxSet{
 		TaxSet{100, 6900},
@@ -14,6 +17,7 @@ func NewList() []TaxSet {
 		TaxSet{300, 13300},
 		TaxSet{350, 14800},
 		TaxSet{400, 16800},
+		TaxSet{450, 18800},
 	}
 	return list
 }
@@ -31,12 +35,12 @@ func Calc(s int, age int) int {
 	}
 
 	min := 0
-	for i, set := range list {
+	for _, set := range list {
 		if ss >= min && ss < set.index {
 			total += set.tax + 3200
 			return total
 		}
-		min = i
+		min = set.index
 	}
-	return total
+	return total + maxTax + 3200
 }
