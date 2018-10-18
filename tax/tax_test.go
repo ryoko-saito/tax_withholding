@@ -33,4 +33,18 @@ func TestCalc(t *testing.T) {
 	if tax != 18300 {
 		t.Error("failed")
 	}
+
+	//収入が4500000円以上 21800 + 3200
+	age = 39
+	s = 4500000
+	tax = Calc(s, age)
+	if tax != 25000 {
+		t.Error("failed")
+	}
+
+	age = 40
+	tax = Calc(s, age)
+	if tax != 28300 {
+		t.Error("failed")
+	}
 }
