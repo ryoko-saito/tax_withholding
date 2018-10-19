@@ -22,25 +22,26 @@ func NewHealthList() []HealthSet {
 	return list
 }
 
-//1000000
-func Calc(s int, age int) int {
+//健康保険
+func CalcHealthInsurance(s int) int {
 	ss := int(s / 10000)
 	list := NewHealthList()
-
-	var total int
-
-	//40歳以上
-	if age >= 40 {
-		total = 3300
-	}
 
 	min := 0
 	for _, set := range list {
 		if ss >= min && ss < set.index {
-			total += set.amount + 3200
-			return total
+			return set.amount + 3200
 		}
 		min = set.index
 	}
-	return total + max + 3200
+	return max + 3200
+}
+
+//介護保険
+func CalcCareInsurance(age int) int {
+	if age >= 40 {
+		return 3300
+	} else {
+		return 0
+	}
 }
