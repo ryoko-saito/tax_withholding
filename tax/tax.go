@@ -313,7 +313,7 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 		if kou_or_otsu == 0 {
 			return 0
 		} else {
-			return int(float64(income) * 0.03063)
+			return CalcIntMulFloat(income, 0.03063)
 		}
 	}
 
@@ -325,6 +325,13 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 	//861以上は通常の計算よりも先に行う
 	if i > 860 {
 		//特別な計算
+		if i < 970 {
+			if kou_or_otsu == 0 {
+				return CalcIntMulFloat(income, 0.023483)
+			} else {
+				return CalcIntMulFloat(income, 0.04084)
+			}
+		}
 	}
 
 	/** ここからは重い処理 **/
@@ -343,4 +350,9 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 
 	//ここを通ることはあり得ないので、0を返すことにする
 	return 0
+}
+
+//整数と少数をかける計算の関数
+func CalcIntMulFloat(i int, f float64) int {
+	return int(float64(i) * f)
 }
