@@ -6,7 +6,6 @@ type TaxSet struct {
 	otsu  int   //乙
 }
 
-
 func NewTaxList() []TaxSet {
 	list := []TaxSet{
 		TaxSet{89, []int{130, 0, 0, 0, 0, 0, 0, 0}, 3200},
@@ -325,17 +324,14 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 		//特別な計算
 		if i < 970 {
 			if kou_or_otsu == 0 {
-				kou:=[]int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}
-				return kou[support]+CalcIntMulFloat(income-860000, 0.23483)
-
-				}
-
+				kou := []int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}
+				return kou[support] + CalcIntMulFloat(income-860000, 0.23483)
 			} else {
 				return CalcIntMulFloat(income, 0.4084)
 			}
 		} else if i == 970 {
 			if kou_or_otsu == 0 {
-				kou:= []int{123190, 115760, 108320, 101770, 95310, 88850, 82370, 75910}
+				kou := []int{123190, 115760, 108320, 101770, 95310, 88850, 82370, 75910}
 				return kou[support]
 			} else {
 				return CalcIntMulFloat(income, 0.4084)
