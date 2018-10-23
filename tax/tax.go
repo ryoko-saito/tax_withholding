@@ -296,6 +296,9 @@ func NewTaxList() []TaxSet {
 		TaxSet{854, []int{95590, 88150, 80870, 74400, 67940, 61470, 55000, 48540}, 316200},
 		TaxSet{857, []int{96290, 88860, 81490, 75010, 68550, 62090, 55610, 49150}, 317700},
 		TaxSet{860, []int{97000, 89560, 82130, 75630, 69160, 62700, 56230, 48760}, 319300},
+
+		//860000円の時は注意が必要 860000は860以上、861未満で対処
+		TaxSet{861, []int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}, 320900},
 	}
 
 	return list
@@ -319,6 +322,12 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 		support = 7
 	}
 
+	//861以上は通常の計算よりも先に行う
+	if i > 860 {
+		//特別な計算
+	}
+
+	/** ここからは重い処理 **/
 	min := 0
 	list := NewTaxList()
 	for _, set := range list {
@@ -332,21 +341,6 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 		min = set.index
 	}
 
-	var kou []int
-
-	//860000円
-	if i == 860 {
-		if kou_or_otsu == 0 {
-			kou = []int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}
-			return kou[support]
-		} else {
-			return 320900
-		}
-	}
-
-	if kou_or_otsu == 0 {
-		return kouMax
-	} else {
-		return otsuMax
-	}
+	//ここを通ることはあり得ないので、0を返すことにする
+	return 0
 }
