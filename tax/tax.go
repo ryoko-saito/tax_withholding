@@ -332,6 +332,18 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 		min = set.index
 	}
 
+	var kou []int
+
+	//860000円
+	if i == 860 {
+		if kou_or_otsu == 0 {
+			kou = []int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}
+			return kou[support]
+		} else {
+			return 320900
+		}
+	}
+
 	if kou_or_otsu == 0 {
 		return kouMax
 	} else {
