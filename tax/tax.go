@@ -304,7 +304,15 @@ func NewTaxList() []TaxSet {
 // kou_or_otsu kouは0、otsuは1にする
 func CalcTax(income int, kou_or_otsu int, support int) int {
 	i := int(income / 1000)
-	list := NewTaxList()
+
+	//88000円未満
+	if i < 88 {
+		if kou_or_otsu == 0 {
+			return 0
+		} else {
+			return int(float64(income) * 0.03063)
+		}
+	}
 
 	//supportは7まで。7より大きな数字を指定した場合は7にする
 	if support > 7 {
@@ -312,6 +320,7 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 	}
 
 	min := 0
+	list := NewTaxList()
 	for _, set := range list {
 		if i >= min && i < set.index {
 			if kou_or_otsu == 0 {

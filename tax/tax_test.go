@@ -5,11 +5,26 @@ import (
 )
 
 func TestCalcTax(t *testing.T) {
-	income := 200000
+	//88000円以下
+	income := 87000
 	kou_or_otsu := 0
+	tax := CalcTax(income, kou_or_otsu, 0)
+	if tax != 0 {
+		t.Error("failed")
+	}
+
+	//乙の場合は3.063％
+	kou_or_otsu = 1
+	tax = CalcTax(income, kou_or_otsu, 0)
+	if tax != int(float64(income)*0.03063) {
+		t.Error("failed")
+	}
+
+	income = 200000
+	kou_or_otsu = 0
 	support := 0
 
-	tax := CalcTax(income, kou_or_otsu, support)
+	tax = CalcTax(income, kou_or_otsu, support)
 	if tax != 4770 {
 		t.Error("failed")
 	}
