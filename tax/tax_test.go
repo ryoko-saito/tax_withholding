@@ -58,4 +58,20 @@ func TestCalcTax(t *testing.T) {
 	if tax != 320900 {
 		t.Error("failed")
 	}
+
+	//甲
+	income = 870000
+	kou_or_otsu = 0
+	support = 2
+	tax = CalcTax(income, kou_or_otsu, support)
+	if tax != 84828 {
+		t.Error("failed")
+	}
+
+	//乙
+	kou_or_otsu = 1
+	tax = CalcTax(income, kou_or_otsu, support)
+	if tax != 324984 {
+		t.Error("failed")
+	}
 }
