@@ -9,9 +9,14 @@ type TaxSet struct {
 //扶養で7人を超えた時に増える控除額
 var supportOverDiduct int
 
+//従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
+var foLLow int
+
+var kouOrOtsu int
+
 //固定長配列のTaxSetという配列の中の要素が構造体になっている
 func NewTaxList() []TaxSet {
-	list := []TaxSet{
+	return []TaxSet{
 		TaxSet{89, []int{130, 0, 0, 0, 0, 0, 0, 0}, 3200},
 		TaxSet{90, []int{180, 0, 0, 0, 0, 0, 0, 0}, 3200},
 		TaxSet{91, []int{230, 0, 0, 0, 0, 0, 0, 0}, 3200},
@@ -301,13 +306,17 @@ func NewTaxList() []TaxSet {
 		//860000円の時は注意が必要 860000は860以上、861未満で対処
 		TaxSet{861, []int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}, 320900},
 	}
-
-	return list
 }
 
 // kou_or_otsu kouは0、otsuは1にする
-func CalcTax(income int, kou_or_otsu int, support int) int {
+func CalcTax(income int, kou_or_otsu int, support int, follow int) int {
 	i := int(income / 1000)
+
+	//甲か乙の情報をパッケージスコープの変数に入れておく
+	kouOrOtsu = kou_or_otsu
+
+	//従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
+	foLLow = follow
 
 	//supportは7まで。7より大きな数字を指定した場合は7にする
 	supportOverDiduct = 0 //初期化
@@ -404,8 +413,14 @@ func CalcIntMulFloat(i int, f float64) int {
 }
 
 //最終調整
+
 func ajust(tax int) int {
-	tax -= supportOverDiduct
+	if foLLow == 1 && kouOrOtsu == 1 {
+		return tax
+	} else {
+		tax -= supportOverDiduct
+	}
+
 	if tax < 0 {
 		tax = 0
 	}

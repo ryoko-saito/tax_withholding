@@ -4,113 +4,40 @@ import (
 	"testing"
 )
 
+type TestSet struct {
+	income      int //所得
+	kou_or_otsu int //甲か乙か？
+	support     int //扶養人数
+	follow      int //扶養の申請書提出の有無
+	result      int //テスト実行時の正解の値
+}
+
+func NewTestSet() []TestSet {
+	return []TestSet{
+		TestSet{87000, 0, 0, 0, 0},    //88000円以下、甲で不要なし
+		TestSet{87000, 1, 0, 0, 2664}, //88000円以下、乙で不要なし
+		TestSet{200000, 0, 0, 0, 4770},
+		TestSet{200000, 0, 5, 0, 0},
+		TestSet{478000, 0, 5, 0, 7500},
+		TestSet{820000, 0, 9, 0, 38870},
+		TestSet{860000, 0, 3, 0, 75930},
+		TestSet{860000, 1, 3, 0, 320900},
+		TestSet{870000, 0, 2, 0, 84828},
+		TestSet{870000, 1, 2, 0, 324984},
+		TestSet{970000, 1, 8, 0, 364214},
+		TestSet{1700000, 0, 8, 0, 320258},
+		TestSet{3550000, 0, 4, 0, 1095390},
+		TestSet{3550000, 1, 4, 0, 1512993},
+	}
+}
+
 func TestCalcTax(t *testing.T) {
-	//88000円以下
-	income := 87000
-	kou_or_otsu := 0
-	tax := CalcTax(income, kou_or_otsu, 0)
-	if tax != 0 {
-		t.Error("failed")
-	}
 
-	//乙の場合は3.063％
-	kou_or_otsu = 1
-	tax = CalcTax(income, kou_or_otsu, 0)
-	if tax != int(float64(income)*0.03063) {
-		t.Error("failed")
-	}
-
-	income = 200000
-	kou_or_otsu = 0
-	support := 0
-
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 4770 {
-		t.Error("failed")
-	}
-
-	support = 5
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 0 {
-		t.Error("failed")
-	}
-
-	income = 478000
-	kou_or_otsu = 0
-	support = 5
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 7500 {
-		t.Error("failed")
-	}
-
-	//860000円の時
-	income = 860000
-	kou_or_otsu = 0
-	support = 3
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 75930 {
-		t.Error("failed")
-	}
-
-	//乙
-	kou_or_otsu = 1
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 320900 {
-		t.Error("failed")
-	}
-
-	//甲
-	income = 870000
-	kou_or_otsu = 0
-	support = 2
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 84828 {
-		t.Error("failed")
-	}
-
-	//乙
-	kou_or_otsu = 1
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 324984 {
-		t.Error("failed")
-	}
-
-	income = 820000
-	kou_or_otsu = 0
-	support = 9
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 38870 {
-		t.Error("failed")
-	}
-
-	income = 970000
-	kou_or_otsu = 1
-	support = 8
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 364214 {
-		t.Error("failed")
-	}
-
-	income = 1700000
-	kou_or_otsu = 0
-	support = 8
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 320258 {
-		t.Error("failed")
-	}
-
-	income = 3550000
-	kou_or_otsu = 0
-	support = 4
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 1095390 {
-		t.Error("failed")
-	}
-
-	income = 3550000
-	kou_or_otsu = 1
-	tax = CalcTax(income, kou_or_otsu, support)
-	if tax != 1512993 {
-		t.Error("failed")
+	sets := NewTestSet()
+	for i, set := range sets {
+		tax := CalcTax(set.income, set.kou_or_otsu, set.support, set.follow)
+		if tax != set.result {
+			t.Errorf("failed index:%d ok:%d prac:%d", i, set.result, tax)
+		}
 	}
 }
