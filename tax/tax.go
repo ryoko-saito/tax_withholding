@@ -6,6 +6,9 @@ type TaxSet struct {
 	otsu  int   //乙
 }
 
+//扶養で7人を超えた時に増える控除額
+var supportOverDiduct int
+
 //固定長配列のTaxSetという配列の中の要素が構造体になっている
 func NewTaxList() []TaxSet {
 	list := []TaxSet{
@@ -306,18 +309,20 @@ func NewTaxList() []TaxSet {
 func CalcTax(income int, kou_or_otsu int, support int) int {
 	i := int(income / 1000)
 
+	//supportは7まで。7より大きな数字を指定した場合は7にする
+	supportOverDiduct = 0 //初期化
+	if support > 7 {
+		supportOverDiduct = (support - 7) * 1610
+		support = 7
+	}
+
 	//88000円未満
 	if i < 88 {
 		if kou_or_otsu == 0 {
-			return 0
+			return ajust(0)
 		} else {
-			return CalcIntMulFloat(income, 0.03063)
+			return ajust(CalcIntMulFloat(income, 0.03063))
 		}
-	}
-
-	//supportは7まで。7より大きな数字を指定した場合は7にする
-	if support > 7 {
-		support = 7
 	}
 
 	//861以上は通常の計算よりも先に行う
@@ -326,35 +331,51 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 		if i < 970 {
 			if kou_or_otsu == 0 {
 				kou := []int{97350, 89920, 82480, 75930, 69470, 63010, 56530, 50070}
-				return kou[support] + CalcIntMulFloat((income-860000), 0.23483)
+				return ajust(kou[support] + CalcIntMulFloat((income-860000), 0.23483))
 			} else {
-				return CalcIntMulFloat((income-860000), 0.4084) + 320900
+				return ajust(CalcIntMulFloat((income-860000), 0.4084) + 320900)
 			}
 		} else if i == 970 {
 			if kou_or_otsu == 0 {
 				kou := []int{123190, 115760, 108320, 101770, 95310, 88850, 82370, 75910}
-				return kou[support]
+				return ajust(kou[support])
 			} else {
-				return CalcIntMulFloat(income, 0.4084)
+				return ajust(320900 + CalcIntMulFloat((income-860000), 0.4084))
 			}
 		} else if i < 1720 {
 			if kou_or_otsu == 0 {
 				kou := []int{123190, 115760, 108320, 101770, 95310, 88850, 82370, 75910}
-				return kou[support] + CalcIntMulFloat((income-970000), 0.33693)
+				return ajust(kou[support] + CalcIntMulFloat((income-970000), 0.33693))
 			} else {
-				return CalcIntMulFloat(income, 0.4084)
+				return ajust(320900 + CalcIntMulFloat((income-860000), 0.4084))
 			}
 		} else if i == 1720 {
 			if kou_or_otsu == 0 {
 				kou := []int{375890, 368460, 361020, 354470, 348010, 341550, 335070, 328610}
-				return kou[support]
+				return ajust(kou[support])
 			} else {
-				return 672200
+				return ajust(672200)
 			}
 		} else if i < 3550 {
 			if kou_or_otsu == 0 {
 				kou := []int{375890, 368460, 361020, 354470, 348010, 341550, 335070, 328610}
-				return kou[support] + CalcIntMulFloat((income-1720000), 0.4084)
+				return ajust(kou[support] + CalcIntMulFloat((income-1720000), 0.4084))
+			} else {
+				return ajust(CalcIntMulFloat(income, 0.45945))
+			}
+		} else if i == 3550 {
+			if kou_or_otsu == 0 {
+				kou := []int{1123270, 1115840, 1108400, 1101850, 1095390, 1088930, 1082450, 1075990}
+				return ajust(kou[support])
+			} else {
+				return ajust(672200 + CalcIntMulFloat((income-1720000), 0.45945))
+			}
+		} else if i > 3550 {
+			if kou_or_otsu == 0 {
+				kou := []int{1123270, 1115840, 1108400, 1101850, 1095390, 1088930, 1082450, 1075990}
+				return ajust(kou[support] + CalcIntMulFloat((income-3500000), 0.45945))
+			} else {
+				return ajust(672200 + CalcIntMulFloat((income-1720000), 0.45945))
 			}
 		}
 	}
@@ -365,9 +386,9 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 	for _, set := range list {
 		if i >= min && i < set.index {
 			if kou_or_otsu == 0 {
-				return set.kou[support]
+				return ajust(set.kou[support])
 			} else {
-				return set.otsu
+				return ajust(set.otsu)
 			}
 		}
 		min = set.index
@@ -380,4 +401,13 @@ func CalcTax(income int, kou_or_otsu int, support int) int {
 //整数と少数をかける計算の関数 現時点では切り捨て
 func CalcIntMulFloat(i int, f float64) int {
 	return int(float64(i) * f)
+}
+
+//最終調整
+func ajust(tax int) int {
+	tax -= supportOverDiduct
+	if tax < 0 {
+		tax = 0
+	}
+	return tax
 }

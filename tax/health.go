@@ -8,6 +8,7 @@ type HealthSet struct {
 //450万以上の税金額
 const max = 21800
 
+//配列の中に構造体が入っている
 func NewHealthList() []HealthSet {
 	list := []HealthSet{
 		HealthSet{100, 6900},
