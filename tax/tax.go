@@ -10,7 +10,7 @@ type TaxSet struct {
 var supportOverDiduct int
 
 //従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
-var foLLow int
+var FOLLOW int
 
 var kouOrOtsu int
 
@@ -316,7 +316,7 @@ func CalcTax(income int, kou_or_otsu int, support int, follow int) int {
 	kouOrOtsu = kou_or_otsu
 
 	//従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
-	foLLow = follow
+	FOLLOW = follow
 
 	//supportは7まで。7より大きな数字を指定した場合は7にする
 	supportOverDiduct = 0 //初期化
@@ -415,7 +415,7 @@ func CalcIntMulFloat(i int, f float64) int {
 //最終調整
 
 func ajust(tax int) int {
-	if foLLow == 1 && kouOrOtsu == 1 {
+	if FOLLOW == 1 && kouOrOtsu == 1 {
 		return tax
 	} else {
 		tax -= supportOverDiduct
