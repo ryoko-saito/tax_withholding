@@ -1,18 +1,15 @@
 package tax
 
+/** ajustのためのパラメータ **/
+var supportOverDiduct int //扶養で7人を超えた時に増える控除額
+var FOLLOW int            //従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
+var kouOrOtsu int         //甲 or 乙のパラメータ
+
 type TaxSet struct {
 	index int   //(月収-社会保険)/1000
 	kou   []int //甲
 	otsu  int   //乙
 }
-
-//扶養で7人を超えた時に増える控除額
-var supportOverDiduct int
-
-//従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
-var FOLLOW int
-
-var kouOrOtsu int
 
 //固定長配列のTaxSetという配列の中の要素が構造体になっている
 func NewTaxList() []TaxSet {
@@ -413,7 +410,6 @@ func CalcIntMulFloat(i int, f float64) int {
 }
 
 //最終調整
-
 func ajust(tax int) int {
 	if FOLLOW == 1 && kouOrOtsu == 1 {
 		return tax
