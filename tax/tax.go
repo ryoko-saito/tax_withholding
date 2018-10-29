@@ -4,6 +4,7 @@ package tax
 var supportOverDiduct int //扶養で7人を超えた時に増える控除額
 var FOLLOW int            //従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
 var kouOrOtsu int         //甲 or 乙のパラメータ
+var SUPPORT int
 
 type TaxSet struct {
 	index int   //(月収-社会保険)/1000
@@ -309,13 +310,11 @@ func NewTaxList() []TaxSet {
 func CalcTax(income int, kou_or_otsu int, support int, follow int) int {
 	i := int(income / 1000)
 
-	//甲か乙の情報をパッケージスコープの変数に入れておく
-	kouOrOtsu = kou_or_otsu
+	/** ajustのためのパラメータ **/
+	kouOrOtsu = kou_or_otsu //甲か乙の情報をパッケージスコープの変数に入れておく
+	FOLLOW = follow         //従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
+	SUPPORT = support       //supportは7まで。7より大きな数字を指定した場合は7にする
 
-	//従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
-	FOLLOW = follow
-
-	//supportは7まで。7より大きな数字を指定した場合は7にする
 	supportOverDiduct = 0 //初期化
 	if support > 7 {
 		supportOverDiduct = (support - 7) * 1610
@@ -412,7 +411,7 @@ func CalcIntMulFloat(i int, f float64) int {
 //最終調整
 func ajust(tax int) int {
 	if FOLLOW == 1 && kouOrOtsu == 1 {
-		return tax
+		tax -= (SUPPORT * 1610)
 	} else {
 		tax -= supportOverDiduct
 	}
