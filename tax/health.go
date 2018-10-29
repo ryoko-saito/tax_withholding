@@ -23,26 +23,47 @@ func NewHealthList() []HealthSet {
 	return list
 }
 
-//健康保険
-func CalcHealthInsurance(s int) int {
+//健康保険 sは収入、fは家族の人数,bは2年前所得
+func CalcHealthInsurance(s int, f int, b int) int {
 	ss := int(s / 10000)
-	list := NewHealthList()
+	if f == 0 {
+		list := NewHealthList()
 
-	min := 0
-	for _, set := range list {
-		if ss >= min && ss < set.index {
-			return set.amount + 3200
+		min := 0
+		for _, set := range list {
+			if ss >= min && ss < set.index {
+				return set.amount + 3200
+			}
+			min = set.index
 		}
-		min = set.index
+		return max + 3200
+	} else if f > 0 {
+		totalAmount := 5500 + int(float64(b/10000-33)*0.0055/10)*10 //1桁目は必ず0にするため、合算を÷10してから×10で戻す
+		totalAmount += f * 200
+
+		//合計が45000円以上にさせたくない
+		if totalAmount > 45000 {
+			totalAmount = 45000
+		}
+		h := f * 3200 //hは後期高齢者支援金額
+		if h > 12800 {
+			h = 12800
+		}
+		return totalAmount + h
 	}
-	return max + 3200
+
+	return 0
 }
 
 //介護保険
-func CalcCareInsurance(age int) int {
-	if age >= 40 {
+func CalcCareInsurance(age int, f int) int {
+	if age >= 40 && f == 0 {
 		return 3300
 	} else {
-		return 0
+		s := 3300 * f
+		if s > 13200 {
+			return 13200
+		}
+		return s
 	}
 }
