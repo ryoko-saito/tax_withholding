@@ -1,8 +1,8 @@
 package tax
 
 type HealthSet struct {
-	index  int
-	amount int
+	index  int //2年前所得の上限値
+	amount int //保険料
 }
 
 //450万以上の税金額
@@ -23,9 +23,9 @@ func NewHealthList() []HealthSet {
 	return list
 }
 
-//健康保険 sは収入、fは家族の人数,bは2年前所得
-func CalcHealthInsurance(s int, f int, b int) int {
-	ss := int(s / 10000)
+//健康保険 fは家族の人数,bは2年前所得
+func CalcHealthInsurance(b int, f int) int {
+	ss := int(b / 10000)
 	if f == 0 {
 		list := NewHealthList()
 
@@ -38,7 +38,7 @@ func CalcHealthInsurance(s int, f int, b int) int {
 		}
 		return max + 3200
 	} else if f > 0 {
-		totalAmount := 5500 + int(float64(b/10000-33)*0.0055/10)*10 //1桁目は必ず0にするため、合算を÷10してから×10で戻す
+		totalAmount := 5500 + int(float64(b-330000)*0.0055/10)*10 //1桁目は必ず0にするため、合算を÷10してから×10で戻す
 		totalAmount += f * 200
 
 		//合計が45000円以上にさせたくない
