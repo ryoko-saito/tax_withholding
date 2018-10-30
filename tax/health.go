@@ -55,15 +55,11 @@ func CalcHealthInsurance(b int, f int) int {
 	return 0
 }
 
-//介護保険
-func CalcCareInsurance(age int, f int) int {
-	if age >= 40 && f == 0 {
-		return 3300
-	} else {
-		s := 3300 * f
-		if s > 13200 {
-			return 13200
-		}
-		return s
+//介護保険、oは40歳以上64歳未満の扶養人数
+func CalcCareInsurance(o int) int {
+	s := 3300 * o
+	if s > 13200 {
+		s = 13200
 	}
+	return s
 }

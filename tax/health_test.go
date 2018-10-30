@@ -28,18 +28,17 @@ func TestCalcHealthInsurance(t *testing.T) {
 	}
 }
 
-func TestCalcCareInsurance(t *testing.T) {
-	//年齢が40未満
-	age := 39
-	f := 0
-	i := CalcCareInsurance(age, f)
-	if i != 0 {
-		t.Error("failed")
-	}
+func NewCareSet() []int {
+	//インデックスに人数、値は正解の金額
+	return []int{0, 3300, 6600, 9900, 13200, 13200, 13200}
+}
 
-	age = 40
-	i = CalcCareInsurance(age, f)
-	if i != 3300 {
-		t.Error("failed")
+func TestCalcCareInsurance(t *testing.T) {
+	sets := NewCareSet()
+	for i, res := range sets {
+		ins := CalcCareInsurance(i)
+		if ins != res {
+			t.Errorf("failed index:%d ok:%d prac:%d", i, res, ins)
+		}
 	}
 }
