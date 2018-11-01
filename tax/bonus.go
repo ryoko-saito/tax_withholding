@@ -24,6 +24,23 @@ func NewBonusList() []BonusSets {
 				BonusSet{max: 68, rate: 0},
 				BonusSet{max: 79, rate: 2.042},
 				BonusSet{max: 252, rate: 4.084},
+				BonusSet{max: 300, rate: 6.126},
+				BonusSet{max: 334, rate: 8.168},
+				BonusSet{max: 363, rate: 10.210},
+				BonusSet{max: 395, rate: 12.252},
+				BonusSet{max: 426, rate: 14.294},
+				BonusSet{max: 550, rate: 16.336},
+				BonusSet{max: 647, rate: 18.378},
+				BonusSet{max: 699, rate: 20.420},
+				BonusSet{max: 730, rate: 22.462},
+				BonusSet{max: 764, rate: 24.504},
+				BonusSet{max: 804, rate: 26.546},
+				BonusSet{max: 857, rate: 28.588},
+				BonusSet{max: 926, rate: 30.630},
+				BonusSet{max: 1321, rate: 32.672},
+				BonusSet{max: 1532, rate: 35.735},
+				BonusSet{max: 2661, rate: 38.798},
+				BonusSet{max: 3548, rate: 41.861},
 			},
 		},
 		//扶養が1の時のrate
@@ -32,42 +49,189 @@ func NewBonusList() []BonusSets {
 				BonusSet{max: 94, rate: 0},
 				BonusSet{max: 243, rate: 2.042},
 				BonusSet{max: 282, rate: 4.084},
+				BonusSet{max: 338, rate: 6.126},
+				BonusSet{max: 365, rate: 8.168},
+				BonusSet{max: 394, rate: 10.210},
+				BonusSet{max: 422, rate: 12.252},
+				BonusSet{max: 455, rate: 14.294},
+				BonusSet{max: 550, rate: 16.336},
+				BonusSet{max: 663, rate: 18.378},
+				BonusSet{max: 720, rate: 20.420},
+				BonusSet{max: 752, rate: 22.462},
+				BonusSet{max: 787, rate: 24.504},
+				BonusSet{max: 826, rate: 26.546},
+				BonusSet{max: 885, rate: 28.588},
+				BonusSet{max: 956, rate: 30.630},
+				BonusSet{max: 1346, rate: 32.672},
+				BonusSet{max: 1560, rate: 35.735},
+				BonusSet{max: 2685, rate: 38.798},
+				BonusSet{max: 3580, rate: 41.861},
+			},
+		},
+		//扶養が2の時のrate
+		BonusSets{
+			set: []BonusSet{
+				BonusSet{max: 133, rate: 0},
+				BonusSet{max: 269, rate: 2.042},
+				BonusSet{max: 312, rate: 4.084},
+				BonusSet{max: 369, rate: 6.126},
+				BonusSet{max: 393, rate: 8.168},
+				BonusSet{max: 420, rate: 10.210},
+				BonusSet{max: 450, rate: 12.252},
+				BonusSet{max: 484, rate: 14.294},
+				BonusSet{max: 550, rate: 16.336},
+				BonusSet{max: 678, rate: 18.378},
+				BonusSet{max: 741, rate: 20.420},
+				BonusSet{max: 774, rate: 22.462},
+				BonusSet{max: 810, rate: 24.504},
+				BonusSet{max: 852, rate: 26.546},
+				BonusSet{max: 914, rate: 28.588},
+				BonusSet{max: 987, rate: 30.630},
+				BonusSet{max: 1370, rate: 32.672},
+				BonusSet{max: 1589, rate: 35.735},
+				BonusSet{max: 2708, rate: 38.798},
+				BonusSet{max: 3611, rate: 41.861},
+			},
+		},
+		//扶養が3の時のrate
+		BonusSets{
+			set: []BonusSet{
+				BonusSet{max: 171, rate: 0},
+				BonusSet{max: 295, rate: 2.042},
+				BonusSet{max: 345, rate: 4.084},
+				BonusSet{max: 398, rate: 6.126},
+				BonusSet{max: 417, rate: 8.168},
+				BonusSet{max: 445, rate: 10.210},
+				BonusSet{max: 477, rate: 12.252},
+				BonusSet{max: 513, rate: 14.294},
+				BonusSet{max: 557, rate: 16.336},
+				BonusSet{max: 693, rate: 18.378},
+				BonusSet{max: 762, rate: 20.420},
+				BonusSet{max: 796, rate: 22.462},
+				BonusSet{max: 833, rate: 24.504},
+				BonusSet{max: 879, rate: 26.546},
+				BonusSet{max: 942, rate: 28.588},
+				BonusSet{max: 1017, rate: 30.630},
+				BonusSet{max: 1394, rate: 32.672},
+				BonusSet{max: 1617, rate: 35.735},
+				BonusSet{max: 2732, rate: 38.798},
+				BonusSet{max: 3643, rate: 41.861},
+			},
+		},
+		//扶養が4の時のrate
+		BonusSets{
+			set: []BonusSet{
+				BonusSet{max: 210, rate: 0},
+				BonusSet{max: 300, rate: 2.042},
+				BonusSet{max: 378, rate: 4.084},
+				BonusSet{max: 424, rate: 6.126},
+				BonusSet{max: 444, rate: 8.168},
+				BonusSet{max: 470, rate: 10.210},
+				BonusSet{max: 504, rate: 12.252},
+				BonusSet{max: 543, rate: 14.294},
+				BonusSet{max: 591, rate: 16.336},
+				BonusSet{max: 591, rate: 18.378},
+				BonusSet{max: 708, rate: 20.420},
+				BonusSet{max: 828, rate: 22.462},
+				BonusSet{max: 859, rate: 24.504},
+				BonusSet{max: 906, rate: 26.546},
+				BonusSet{max: 970, rate: 28.588},
+				BonusSet{max: 1048, rate: 30.630},
+				BonusSet{max: 1419, rate: 32.672},
+				BonusSet{max: 1645, rate: 35.735},
+				BonusSet{max: 2756, rate: 38.798},
+				BonusSet{max: 3675, rate: 41.861},
+			},
+		},
+
+		//扶養が5の時のrate
+		BonusSets{
+			set: []BonusSet{
+				BonusSet{max: 243, rate: 0},
+				BonusSet{max: 300, rate: 2.042},
+				BonusSet{max: 406, rate: 4.084},
+				BonusSet{max: 450, rate: 6.126},
+				BonusSet{max: 472, rate: 8.168},
+				BonusSet{max: 496, rate: 10.210},
+				BonusSet{max: 531, rate: 12.252},
+				BonusSet{max: 574, rate: 14.294},
+				BonusSet{max: 618, rate: 16.336},
+				BonusSet{max: 723, rate: 18.378},
+				BonusSet{max: 804, rate: 20.420},
+				BonusSet{max: 841, rate: 22.462},
+				BonusSet{max: 885, rate: 24.504},
+				BonusSet{max: 934, rate: 26.546},
+				BonusSet{max: 998, rate: 28.588},
+				BonusSet{max: 1078, rate: 30.630},
+				BonusSet{max: 1443, rate: 32.672},
+				BonusSet{max: 1674, rate: 35.735},
+				BonusSet{max: 2780, rate: 38.798},
+				BonusSet{max: 3706, rate: 41.861},
+			},
+		},
+
+		//扶養が6の時のrate
+		BonusSets{
+			set: []BonusSet{
+				BonusSet{max: 275, rate: 0},
+				BonusSet{max: 333, rate: 2.042},
+				BonusSet{max: 431, rate: 4.084},
+				BonusSet{max: 476, rate: 6.126},
+				BonusSet{max: 499, rate: 8.168},
+				BonusSet{max: 525, rate: 10.210},
+				BonusSet{max: 559, rate: 12.252},
+				BonusSet{max: 602, rate: 14.294},
+				BonusSet{max: 645, rate: 16.336},
+				BonusSet{max: 739, rate: 18.378},
+				BonusSet{max: 825, rate: 20.420},
+				BonusSet{max: 865, rate: 22.462},
+				BonusSet{max: 911, rate: 24.504},
+				BonusSet{max: 961, rate: 26.546},
+				BonusSet{max: 1026, rate: 28.588},
+				BonusSet{max: 1108, rate: 30.630},
+				BonusSet{max: 1468, rate: 32.672},
+				BonusSet{max: 1702, rate: 35.735},
+				BonusSet{max: 2803, rate: 38.798},
+				BonusSet{max: 3738, rate: 41.861},
+			},
+		},
+
+		//扶養が7人以上の時のrate
+		BonusSets{
+			set: []BonusSet{
+				BonusSet{max: 308, rate: 0},
+				BonusSet{max: 372, rate: 2.042},
+				BonusSet{max: 456, rate: 4.084},
+				BonusSet{max: 502, rate: 6.126},
+				BonusSet{max: 527, rate: 8.168},
+				BonusSet{max: 553, rate: 10.210},
+				BonusSet{max: 588, rate: 12.252},
+				BonusSet{max: 627, rate: 14.294},
+				BonusSet{max: 671, rate: 16.336},
+				BonusSet{max: 754, rate: 18.378},
+				BonusSet{max: 848, rate: 20.420},
+				BonusSet{max: 890, rate: 22.462},
+				BonusSet{max: 937, rate: 24.504},
+				BonusSet{max: 988, rate: 26.546},
+				BonusSet{max: 1054, rate: 28.588},
+				BonusSet{max: 1139, rate: 30.630},
+				BonusSet{max: 1492, rate: 32.672},
+				BonusSet{max: 1730, rate: 35.735},
+				BonusSet{max: 2827, rate: 38.798},
+				BonusSet{max: 3770, rate: 41.861},
 			},
 		},
 	}
-
 }
 
-// type BonusSet struct {
-//   rate int //賞与の金額に乗ずべき率
-//   kou int   ///甲
-//   otsu  int   //乙
-// }
-//
-// //固定長配列のBonusSetという配列の中の要素が構造体になっている
-// func NewBonuslist() []BonusSet{
-//   return[]BonusSet{
-// BonusSet{2.042, []int{ 79  243 133 269 171 295 210 300 243 300 275 333 308 372}, 239},
-// BonusSet{4.084, []int{252 282 269 312 295 345 300 378 300 406 333 431 372 456},239},
-// BonusSet{6.126, []int{  300  338 312 369 345 398 378 424 406 450 431 476 456 502},239},
-// BonusSet{8.168, []int{ 334  365 369 393 398 417 424 444 450 472 476 499 502 527},239},
-// BonusSet{10.210, []int{ 363  394 393 420 417 445 444 470 472 496 499 525 527 553},239},
-// BonusSet{12.252, []int{ 395  422 420 450 445 477 470 504 496 531 525 559 553 588},239},
-// BonusSet{14.294, []int{ 426  455 450 484 477 513 504 543 531 574 559 602 588 627},239},
-// BonusSet{16.336, []int{ 550  550 484 550 513 557 543 591 574 618 602 645 627 671},239},
-// BonusSet{18.378, []int{ 647  663 550 678 557 693 591 708 618 723 645 739 671 754},239},
-// BonusSet{20.420, []int{ 699  720 678 741 693 762 708 783 723 804 739 825 754 848},296},
-// BonusSet{22.462, []int{ 730  752 741 774 762 796 783 818 804 841 825 865 848 890},296},
-// BonusSet{22.504, []int{ 764  787 774 810 796 833 818 859 841 885 865 911 890 937},296},
-// BonusSet{26.546, []int{ 804  826 810 852 833 879 859 906 885 934 911 961 937 988},296},
-// BonusSet{28.588, []int{ 857  885 852 914 879 942 906 970 934 998 961 1,026 988 1,054},296},
-// BonusSet{30.630, []int{ 926  956 914 987 942 1,017 970 1,048 998 1,078 1,026 1,108 1,054 1,139},528},
-// BonusSet{32.672, []int{ 1,321  1,346 987 1,370 1,017 1,394 1,048 1,419 1,078 1,443 1,108 1,468 1,139 1,492},528},
-// BonusSet{35.735, []int{ 1,532  1,560 1,370 1,589 1,394 1,617 1,419 1,645 1,443 1,674 1,468 1,702 1,492 1,730},528},
-// BonusSet{38.798, []int{ 2,661  2,685 1,589 2,708 1,617 2,732 1,645 2,756 1,674 2,780 1,702 2,803 1,730 2,827},1135},
-// BonusSet{41.861, []int{ 3,548  3,580 2,708 3,611 2,732 3,643 2,756 3,675 2,780 3,706 2,803 3,738 2,827 3,770},1135},
-// }
-// }
+func NewBonusOtsuList() []BonusSet {
+	return []BonusSet{
+		BonusSet{max: 239, rate: 10.210},
+		BonusSet{max: 296, rate: 20.420},
+		BonusSet{max: 528, rate: 30.630},
+		BonusSet{max: 1135, rate: 38.798},
+	}
+}
 
 // kou_or_otsu kouは0、otsuは1にする
 func CalcBonusTax(income int, kou_or_otsu int, support int, follow int) int {
@@ -77,12 +241,35 @@ func CalcBonusTax(income int, kou_or_otsu int, support int, follow int) int {
 		support = 7
 	}
 
+	/**最初に上限値の計算を行う**/
+	//甲
+	if kou_or_otsu == 0 {
+		cnds := []int{3548, 3580, 3611, 3643, 3675, 3706, 3738, 3770}
+		if i >= cnds[support] {
+			return CalcIntMulFloat(income, 45.945/100)
+		}
+		//乙
+	} else {
+		if i >= 1135 {
+			return CalcIntMulFloat(income, 45.945/100)
+		}
+	}
+
 	/** ここからは重い処理 **/
-	l := NewBonusList()
-	list := l[support]
+	var list []BonusSet
+
+	//甲
+	if kou_or_otsu == 0 {
+		l := NewBonusList()
+		list = l[support].set
+
+		//乙
+	} else {
+		list = NewBonusOtsuList()
+	}
 
 	min := 0
-	for _, set := range list.set {
+	for _, set := range list {
 		if i >= min && i < set.max {
 			return CalcIntMulFloat(income, set.rate/100)
 		}
