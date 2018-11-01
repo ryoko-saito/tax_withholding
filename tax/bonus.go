@@ -1,11 +1,5 @@
 package tax
 
-/** ajustのためのパラメータ **/
-// var supportOverDiduct int //扶養で7人を超えた時に増える控除額
-// var FOLLOW int            //従たる給与についての扶養控除などの申告書が提出されていない場合0、提出されている場合1
-// var kouOrOtsu int         //甲 or 乙のパラメータ
-// var SUPPORT int
-
 type BonusSets struct {
 	set []BonusSet
 }
@@ -271,7 +265,7 @@ func CalcBonusTax(income int, kou_or_otsu int, support int, follow int) int {
 	min := 0
 	for _, set := range list {
 		if i >= min && i < set.max {
-			return CalcIntMulFloat(income, set.rate/100)
+			return int(CalcIntMulFloat(income, set.rate) / 100)
 		}
 		min = set.max
 	}
